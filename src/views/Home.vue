@@ -1,12 +1,6 @@
 <template>
   <div class="home">
-    <!-- <div>
-      <input type="text" v-model="searchQuery" @keypress.enter="search"  class="app__search">
-    </div> -->
     <movies></movies>
-    <!-- <div>
-      <button @click="loadMore" class="home__load-more">Load More</button>
-    </div> -->
   </div>
 </template>
 
@@ -19,29 +13,10 @@ export default {
   components: {
     Movies
   },
-  data() {
-    return {
-      page: 1,
-      searchQuery: '',
-    }
-  },
   created() {
     this.$store.dispatch('clearMovies');
     this.$store.dispatch('loadPopular');
   },
-  methods: {
-    // loadMore() {
-    //   this.$store.dispatch('incPage');
-    //   this.$store.dispatch('loadPopular');
-    // },
-    // clearMovies() {
-      
-      // this.$store.dispatch('loadPopular');
-    // },
-    search() {
-      this.$router.push(`/search?query=${this.searchQuery}`);
-    },
-  }
 }
 </script>
 
@@ -54,7 +29,6 @@ export default {
    color: inherit;
    background-color: transparent;
    cursor: pointer;
-   @include button-reset;
    padding: 10px;
    background-color: skyblue;
 }
