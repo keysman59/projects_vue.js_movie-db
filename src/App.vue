@@ -1,14 +1,9 @@
 <template>
   <div id="app">
+    <p> {{ movies }} </p>
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/favorites">Favorites</router-link>
-    </div>
-    <div>
-      <input type="text" v-model="searchQuery" @keypress.enter="search">
-    </div>
-    <div>
-      <button @click="loadMore">Load More</button>
+      <router-link to="/favorites" @click="clearMovies">Favorites</router-link>
     </div>
     <router-view/>
     <div v-show="loaded" class="loader"></div>
@@ -26,14 +21,7 @@ export default {
     }
   },
   methods: {
-    search() {
-      this.$router.push(`/search?query=${this.searchQuery}`);
-    },
-    loadMore() {
-      this.$store.dispatch('loadPopular');
-      this.$store.dispatch('incPage');
 
-    }
   },
   computed: {
     ...mapGetters(['loaded']),
@@ -162,4 +150,6 @@ section {
         }
     }
 }
+
+
 </style>

@@ -5,6 +5,7 @@
             <section>
                 <h3>{{ item.original_title }}</h3>
                 <p>{{ item.overview }}</p>
+                <button @click="addFavorites">Добавить в избранное</button>
             </section>
         </li>
     </ul>
@@ -17,6 +18,11 @@ export default {
     data() {
         return {
             imageUrl: 'https://image.tmdb.org/t/p/w342',
+        }
+    },
+    methods: {
+        addFavorites() {
+            this.$store.dispatch('loadIdFavorites');
         }
     },
     computed: {
