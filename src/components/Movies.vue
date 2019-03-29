@@ -1,6 +1,6 @@
 <template>
     <ul>
-        <li v-for="item in movies">
+        <li v-for="item in movies" v-bind:key="item">
             <img :src="imageUrl + item.poster_path" alt="">
             <section>
                 <h3>{{ item.original_title }}</h3>

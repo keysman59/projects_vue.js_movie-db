@@ -2,7 +2,7 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/search">Search</router-link>
+      <router-link to="/favorites">Favorites</router-link>
     </div>
     <div>
       <input type="text" v-model="searchQuery" @keypress.enter="search">
@@ -30,7 +30,9 @@ export default {
       this.$router.push(`/search?query=${this.searchQuery}`);
     },
     loadMore() {
-      this.$store.dispatch('loadMore');
+      this.$store.dispatch('loadPopular');
+      this.$store.dispatch('incPage');
+
     }
   },
   computed: {
@@ -72,7 +74,7 @@ ul {
     li {
         display: inline-block;
         vertical-align: top;
-        width: 25vw;
+        width: 19vw;
         position: relative;
         overflow: hidden;
         background: black;

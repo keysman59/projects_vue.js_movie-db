@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
-import Search from './views/Search.vue'
+import Favorites from './views/Favorites.vue'
 
 Vue.use(Router)
 
@@ -15,8 +15,9 @@ export default new Router({
       component: Home
     },
     {
-      path: '/search',
-      component: Search
+      path: '/favorites',
+      name: 'favorites',
+      component: Favorites
     },
   ]
 })

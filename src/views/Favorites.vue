@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="favorites">
     <movies></movies>
   </div>
 </template>

@@ -11,7 +11,7 @@ export default new Vuex.Store({
   state: {
     movies: [],
     loaded: false,
-    page: 4,
+    page: 1,
   },
   getters: {
     movies(state) {
@@ -25,36 +25,43 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    setMovies(state, movies) {
-      state.movies = movies;
+    addMovies(state, movies) {
+      state.movies = [ ...state.movies, ...movies ];
     },
     setLoading(state, load) {
       state.loaded = load;
     },
-    setNumberPage(state, page) {
-      page++;
-      state.page = page;
+    clearMovies(state) {
+        state.movies = [];
+    },
+    resetPage(state) {
+        state.page = 1;
+    },
+    incPage(state) {
+        state.page += 1;
     }
   },
   actions: {
-    async loadPopular({ commit }) {
+    async loadPopular({ commit, state }) {
       commit('setLoading', true);
-      const response = await axios.get(`/movie/popular?api_key=${apiKey}&sort_by=popularity.desc&page=${this.page}`);
-      // const response = await axios.get(`/movie/popular?api_key=${apiKey}&sort_by=popularity.desc&page=3`);      
-      commit('setMovies', response.data.results);
+      const response = await axios.get(`/movie/popular?api_key=${apiKey}&sort_by=popularity.desc&page=${state.page}`);
+      commit('addMovies', response.data.results);
       commit('setLoading', false);
 
     },
     async loadSearch({ commit }, query) {
       commit('setLoading', true);
       const response = await axios.get(`/search/movie?api_key=${apiKey}&query=${query}&sort_by=popularity.desc&page=1`);
-      commit('setMovies', response.data.results);
+      commit('addMovies', response.data.results);
       commit('setLoading', false);
 
     },
-    loadMore({ commit }) {
-      commit('setNumberPage');
-      const response = await axios.get(`/movie/popular?api_key=${apiKey}&sort_by=popularity.desc&page=${this.page}`);
-    }
+    async incPage({ commit }) {
+        return commit('incPage');
+    },
+    async clearMovies({ commit }) {
+        commit('resetPage');
+        return commit('clearMovies');
+    },
   }
 })
