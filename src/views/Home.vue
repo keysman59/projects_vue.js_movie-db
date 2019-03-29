@@ -25,17 +25,19 @@ export default {
     }
   },
   created() {
-      this.$store.dispatch('loadPopular');
+    this.$store.dispatch('clearMovies');
+    this.$store.dispatch('loadPopular');
+
   },
   methods: {
     loadMore() {
-      this.$store.dispatch('loadPopular');
       this.$store.dispatch('incPage');
+      this.$store.dispatch('loadPopular');
     },
-    clearMovies() {
-      this.$store.dispatch('clearMovies');
+    // clearMovies() {
+      
       // this.$store.dispatch('loadPopular');
-    },
+    // },
     search() {
       this.$router.push(`/search?query=${this.searchQuery}`);
     },
