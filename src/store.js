@@ -30,7 +30,7 @@ export default new Vuex.Store({
   },
   mutations: {
     addFavorites(state, idFavorites) {
-      state.favorites = [ ...state.favorites, ...idFavorites ];
+      state.favorites = state.favorites.push(idFavorites);
     },
     addMovies(state, movies) {
       state.movies = [ ...state.movies, ...movies ];
@@ -58,7 +58,7 @@ export default new Vuex.Store({
     },
     async loadSearch({ commit }, query) {
       commit('setLoading', true);
-      const response = await axios.get(`/search/movie?api_key=${apiKey}&query=${query}&sort_by=popularity.desc&page=1`);
+      const response = await axios.get(`/search/movie?api_key=${apiKey}&query=${query}&sort_by=popularity.desc&page=${state.page}`);
       commit('addMovies', response.data.results);
       commit('setLoading', false);
     },
