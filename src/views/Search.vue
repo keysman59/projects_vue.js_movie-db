@@ -1,8 +1,8 @@
 <template>
   <div class="search">
-    <div>
+    <!-- <div>
       <input type="text" v-model="searchQuery" @keypress.enter="search"  class="app__search">
-    </div>
+    </div> -->
     <movies></movies>
   </div>
 </template>
@@ -20,11 +20,11 @@ const load = (to, from, next) => {
 }
 
 export default {
-  data() {
-      return {
-          searchQuery: '',
-      }
-  },
+//   data() {
+//       return {
+//           searchQuery: '',
+//       }
+//   },
   components: {
     Movies
   },

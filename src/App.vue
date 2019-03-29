@@ -5,6 +5,9 @@
       <router-link to="/search">Search</router-link> |
       <router-link to="/favorites">Favorites</router-link>
     </div>
+    <div>
+      <input type="text" v-model="searchQuery" @keypress.enter="search">
+    </div>
     <router-view/>
     <div v-show="loaded" class="loader"></div>
   </div>
@@ -18,6 +21,11 @@ export default {
     return {
       searchQuery: '',
       page: 1
+    }
+  },
+  methods: {
+    search() {
+      this.$router.push(`/search?query=${this.searchQuery}`);
     }
   },
   computed: {

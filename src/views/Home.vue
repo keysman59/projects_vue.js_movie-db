@@ -1,12 +1,12 @@
 <template>
   <div class="home">
-    <div>
+    <!-- <div>
       <input type="text" v-model="searchQuery" @keypress.enter="search"  class="app__search">
-    </div>
+    </div> -->
     <movies></movies>
-    <div>
+    <!-- <div>
       <button @click="loadMore" class="home__load-more">Load More</button>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -30,10 +30,10 @@ export default {
     this.$store.dispatch('loadPopular');
   },
   methods: {
-    loadMore() {
-      this.$store.dispatch('incPage');
-      this.$store.dispatch('loadPopular');
-    },
+    // loadMore() {
+    //   this.$store.dispatch('incPage');
+    //   this.$store.dispatch('loadPopular');
+    // },
     // clearMovies() {
       
       // this.$store.dispatch('loadPopular');
