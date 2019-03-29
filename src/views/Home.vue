@@ -21,13 +21,13 @@ export default {
   },
   data() {
     return {
-      page: 1
+      page: 1,
+      searchQuery: '',
     }
   },
   created() {
     this.$store.dispatch('clearMovies');
     this.$store.dispatch('loadPopular');
-
   },
   methods: {
     loadMore() {

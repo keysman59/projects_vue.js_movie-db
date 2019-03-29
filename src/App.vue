@@ -3,8 +3,7 @@
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/search">Search</router-link> |
-      <router-link to="/favorites" @click="clearMovies">Favorites</router-link>
-
+      <router-link to="/favorites">Favorites</router-link>
     </div>
     <router-view/>
     <div v-show="loaded" class="loader"></div>
@@ -20,9 +19,6 @@ export default {
       searchQuery: '',
       page: 1
     }
-  },
-  methods: {
-
   },
   computed: {
     ...mapGetters(['loaded']),
