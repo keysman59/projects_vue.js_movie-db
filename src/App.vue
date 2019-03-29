@@ -1,9 +1,10 @@
 <template>
   <div id="app">
-    <p> {{ movies }} </p>
     <div id="nav">
       <router-link to="/">Home</router-link> |
+      <router-link to="/search">Search</router-link> |
       <router-link to="/favorites" @click="clearMovies">Favorites</router-link>
+
     </div>
     <router-view/>
     <div v-show="loaded" class="loader"></div>
