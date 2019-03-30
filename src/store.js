@@ -12,7 +12,7 @@ export default new Vuex.Store({
     movies: [],
     loaded: false,
     page: 1,
-    favorites: [1,2],
+    favorites: [],
   },
   getters: {
     movies(state) {
@@ -29,8 +29,8 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    addFavorites(state, idFavorites) {
-      state.favorites = state.favorites.push(idFavorites);
+    addFavorites(state) {
+      state.favorites = state.favorites.push(response.data.results(index));
     },
     addMovies(state, movies) {
       state.movies = [ ...state.movies, ...movies ];
@@ -46,7 +46,10 @@ export default new Vuex.Store({
     },
     incPage(state) {
         state.page += 1;
-    }
+    },
+    pushIdFavorites(state, idMovies) {
+      state.favorites.push(idMovies);
+  },    
   },
   actions: {
     async loadPopular({ commit, state }) {
@@ -54,25 +57,29 @@ export default new Vuex.Store({
       const response = await axios.get(`/movie/popular?api_key=${apiKey}&sort_by=popularity.desc&page=${state.page}`);
       commit('addMovies', response.data.results);
       commit('setLoading', false);
+      console.log(response.data.results);
       // console.log(response.data.results[0].id);
     },
-    // async loadSearch({ commit, state }, query) {
-      async loadSearch({ commit }, query) {
+    async loadSearch({ commit, state }, query) {
       commit('setLoading', true);
       const response = await axios.get(`/search/movie?api_key=${apiKey}&query=${query}&sort_by=popularity.desc&page=${state.page}`);
-      console.log(state.page);
-      console.log(response.data.results);
-      console.log(query);
       commit('addMovies', response.data.results);
       commit('setLoading', false);
     },
-
-    async loadIdFavorites({ commit, state }) {
+    async loadIdFavorites({ commit, state }, index) {
+      
       commit('setLoading', true);
       const response = await axios.get(`/movie/popular?api_key=${apiKey}&sort_by=popularity.desc&page=${state.page}`);
       commit('addMovies', response.data.results);
+      // console.log(response.data.results[index].id);
+      // let idMovies = response.data.results[index].id; 
+      commit('pushIdFavorites', idMovies);
+      console.log(state.favorites);
       commit('setLoading', false);
-      commit('addFavorites', response.data.results[0].id);
+
+
+      // commit('setLoading', false);
+      // commit('addFavorites', response.data.results[0].id);
       // console.log(response.data.results[0].id);
     },
     async incPage({ commit }) {
