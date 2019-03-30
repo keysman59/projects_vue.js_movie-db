@@ -16,6 +16,13 @@
 <script>
 import { mapGetters } from 'vuex';
 
+const load = (to, from, next) => {
+      const { query } = to.query;
+      store.dispatch('clearMovies', query);
+      store.dispatch('loadSearch', query);
+      next();
+}
+
 export default {
   data() {
     return {
@@ -30,8 +37,13 @@ export default {
   },
   computed: {
     ...mapGetters(['loaded']),
-  }
+  },
+  beforeRouteEnter: load,
+  beforeRouteUpdate: load
 }
+
+
+
 </script>
 
 

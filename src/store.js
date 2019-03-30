@@ -56,14 +56,17 @@ export default new Vuex.Store({
       commit('setLoading', false);
       // console.log(response.data.results[0].id);
     },
-    async loadSearch({ commit }, query, state) {
+    // async loadSearch({ commit, state }, query) {
+      async loadSearch({ commit }, query) {
       commit('setLoading', true);
       const response = await axios.get(`/search/movie?api_key=${apiKey}&query=${query}&sort_by=popularity.desc&page=${state.page}`);
       console.log(state.page);
+      console.log(response.data.results);
       console.log(query);
       commit('addMovies', response.data.results);
       commit('setLoading', false);
     },
+
     async loadIdFavorites({ commit, state }) {
       commit('setLoading', true);
       const response = await axios.get(`/movie/popular?api_key=${apiKey}&sort_by=popularity.desc&page=${state.page}`);
