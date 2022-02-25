@@ -18,8 +18,8 @@ import { mapGetters } from 'vuex';
 
 const load = (to, from, next) => {
       const { query } = to.query;
-      store.dispatch('clearMovies', query);
-      store.dispatch('loadSearch', query);
+      this.$store.dispatch('clearMovies', query);
+      this.$store.dispatch('loadSearch', query);
       next();
 }
 
