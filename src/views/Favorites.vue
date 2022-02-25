@@ -1,12 +1,11 @@
 <template>
   <div class="favorites">
-    <p>{{ favorites }}</p>
-    <movies></movies>
+    <movies :movies="favorites"></movies>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
+
 import Movies from '../components/Movies';
 import store from '../store';
 import { mapGetters } from 'vuex';

@@ -2,10 +2,9 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/search">Search</router-link> |
       <router-link to="/favorites">Favorites</router-link>
     </div>
-    <div>
+    <div class="search">
       <input type="text" v-model="searchQuery" @keypress.enter="search">
     </div>
     <router-view/>
@@ -48,6 +47,10 @@ export default {
 
 
 <style lang="scss">
+.search {
+  margin-bottom: 20px;
+}
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

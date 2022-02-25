@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <movies></movies>
+    <movies :movies="movies"></movies>
     <div>
       <button @click="loadMore" class="home__load-more">Load More</button>
     </div>
@@ -8,7 +8,7 @@
 </template>
 
 <script>
-// @ is an alias to /src
+import { mapGetters } from 'vuex';
 import Movies from '../components/Movies';
 
 export default {
@@ -30,7 +30,10 @@ export default {
       this.$store.dispatch('incPage');
       this.$store.dispatch('loadPopular');
     },
-  }
+  },
+  computed: {
+      ...mapGetters(['movies']),
+  },
 }
 </script>
 

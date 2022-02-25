@@ -14,24 +14,7 @@ export default new Vuex.Store({
     page: 1,
     favorites: [],
   },
-  getters: {
-    movies(state) {
-      return state.movies;
-    },
-    loaded(state) {
-      return state.loaded;
-    },
-    numberPage(state) {
-      return state.page;
-    },
-    favorites(state) {
-      return state.favorites;
-    }
-  },
   mutations: {
-    // addFavorites(state) {
-    //   state.favorites = state.favorites.push(response.data.results(index));
-    // },
     addMovies(state, movies) {
       state.movies = [ ...state.movies, ...movies ];
     },
@@ -47,8 +30,8 @@ export default new Vuex.Store({
     incPage(state) {
         state.page += 1;
     },
-    pushIdFavorites(state, idMovies) {
-      state.favorites.push(idMovies);
+    pushFavorites(state, movie) {
+      state.favorites.push(movie);
   },    
   },
   actions: {
@@ -64,14 +47,9 @@ export default new Vuex.Store({
       commit('addMovies', response.data.results);
       commit('setLoading', false);
     },
-    async loadIdFavorites({ commit, state }, index) {
-      
-      commit('setLoading', true);
-      const response = await axios.get(`/movie/popular?api_key=${apiKey}&sort_by=popularity.desc&page=${state.page}`);
-      commit('addMovies', response.data.results);
-      let idMovies = response.data.results[index].id; 
-      commit('pushIdFavorites', idMovies);
-      commit('setLoading', false);
+    addFavorites({ commit, state }, index) {
+      const movie = state.movies[index];
+      commit('pushFavorites', movie);
     },
     async incPage({ commit }) {
         return commit('incPage');
@@ -80,5 +58,19 @@ export default new Vuex.Store({
         commit('resetPage');
         return commit('clearMovies');
     },
-  }
+  },
+  getters: {
+    movies(state) {
+      return state.movies;
+    },
+    loaded(state) {
+      return state.loaded;
+    },
+    numberPage(state) {
+      return state.page;
+    },
+    favorites(state) {
+      return state.favorites;
+    }
+  },
 })
