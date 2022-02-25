@@ -171,5 +171,34 @@ section {
     }
 }
 
+@media (max-width: 992px) { 
+
+  ul {
+      li {
+          width: 24vw;
+      }
+
+  }
+}
+
+@media (max-width: 767px) { 
+
+  ul {
+      li {
+          width: 33vw;
+      }
+
+  }
+}
+
+@media (max-width: 479px) { 
+
+  ul {
+      li {
+          width: 49vw;
+      }
+
+  }
+}
 
 </style>

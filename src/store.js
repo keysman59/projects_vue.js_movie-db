@@ -48,8 +48,13 @@ export default new Vuex.Store({
       commit('setLoading', false);
     },
     addFavorites({ commit, state }, index) {
+      
       const movie = state.movies[index];
-      commit('pushFavorites', movie);
+      const el = state.favorites.find(item => item.id == state.movies[index].id)
+      console.log(el)
+      if (!el) {
+        commit('pushFavorites', movie);
+      }
     },
     async incPage({ commit }) {
         return commit('incPage');

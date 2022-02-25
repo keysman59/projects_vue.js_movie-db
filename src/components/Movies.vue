@@ -5,10 +5,11 @@
             <section>
                 <h3>{{ item.original_title }}</h3>
                 <p>{{ item.overview }}</p>
-                <button @click="addToFavourite(index)">Добавить в избранное</button>
+                <button v-if="favorites" @click="addToFavourite(index)">Добавить в избранное</button>
             </section>
         </li>
     </ul>
+    
 </template>
 
 <script>
@@ -24,6 +25,11 @@ export default {
     props: {
         movies: {
             type: Array,
+        }
+    },
+    computed: {
+        favorites() {
+            return this.$route.path != '/favorites';
         }
     },
     methods: {
